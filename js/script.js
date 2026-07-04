@@ -109,6 +109,35 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
   this.reset();
 });
 
+// Image Modal
+const imgModal = document.getElementById('imgModal');
+const imgModalContent = document.getElementById('imgModalContent');
+const imgModalClose = document.getElementById('imgModalClose');
+
+document.querySelectorAll('.team-avatar img').forEach(img => {
+  img.style.cursor = 'pointer';
+  img.addEventListener('click', (e) => {
+    e.stopPropagation();
+    imgModalContent.src = img.src;
+    imgModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closeModal() {
+  imgModal.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+imgModalClose.addEventListener('click', closeModal);
+imgModal.addEventListener('click', (e) => {
+  if (e.target === imgModal) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
 // Navbar shadow
 window.addEventListener('scroll', () => {
   const navbar = document.querySelector('.navbar');
